@@ -558,8 +558,10 @@ document.querySelectorAll('.card[data-project]').forEach(function(card){
   }
   function play(){ if(!hv || !hv.getAttribute('src')) return; card.classList.add('is-previewing'); framesIn(); try{ hv.currentTime = 0; }catch(e){} var pp = hv.play(); if(pp && pp.catch) pp.catch(function(){}); }
   function stop(){ if(!hv) return; try{ hv.pause(); hv.currentTime = 0; }catch(e){} card.classList.remove('is-previewing'); framesOut(); }
-  card.addEventListener('mouseenter', play);
-  card.addEventListener('mouseleave', stop);
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    card.addEventListener('mouseenter', play);
+    card.addEventListener('mouseleave', stop);
+  }
   card.addEventListener('focusin', play);
   card.addEventListener('focusout', stop);
 });
@@ -608,6 +610,7 @@ if(window.gsap&&window.ScrollTrigger){
       .to('.hero h1',{yPercent:0,autoAlpha:1,duration:.85},'-=.35')
       .to('.hero-bottom',{y:0,autoAlpha:1,duration:.7},'-=.45')
       .to('.feature',{y:0,autoAlpha:1,duration:.7},'-=.4');
+    if(!desktop) return; // 手机端只做 hero 入场；滚动揭示不隐藏内容，避免触发失效导致排版残留
     if(desktop){
       gsap.fromTo('.feature-image',{yPercent:-9},{yPercent:9,ease:'none',scrollTrigger:{trigger:'.feature',start:'top bottom',end:'bottom top',scrub:.5}});
       const fimg=document.querySelector('.feature-image');
