@@ -133,14 +133,10 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .thumb .hover-video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;background:#151613;opacity:0;transition:opacity .9s ease;pointer-events:none}
 .card.is-previewing.has-preview-video .thumb .hover-video{opacity:1}
 .card.is-previewing.has-preview-video .thumb>img.cover-image{opacity:0;transform:scale(1.025);filter:blur(2px)}
-.thumb .frame-strip{position:absolute;z-index:3;left:0;right:0;bottom:0;height:30%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(5px,.8vw,11px);padding:0 clamp(8px,1.2vw,16px) clamp(8px,1.2vw,16px);align-items:end;background:linear-gradient(180deg,transparent 0%,rgba(10,11,10,.12) 25%,rgba(10,11,10,.76) 100%);opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(-10px);transition:clip-path 1.05s cubic-bezier(.16,1,.3,1),transform 1.05s cubic-bezier(.16,1,.3,1),opacity .65s ease;pointer-events:none}
-.thumb .frame-strip img{width:100%;height:auto;max-width:100%;min-height:0;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid rgba(255,255,255,.68);box-shadow:0 5px 18px rgba(0,0,0,.24);opacity:0;transform:translateX(-18px) scale(.97);transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .7s ease;transition-delay:0s}
-.card.is-previewing .frame-strip,.card:focus-visible .frame-strip{opacity:1;clip-path:inset(0 0 0 0);transform:translateX(0)}
-.card.is-previewing .frame-strip img,.card:focus-visible .frame-strip img{opacity:1;transform:translateX(0) scale(1)}
-.card.is-previewing .frame-strip img:nth-child(1),.card:focus-visible .frame-strip img:nth-child(1){transition-delay:.08s}
-.card.is-previewing .frame-strip img:nth-child(2),.card:focus-visible .frame-strip img:nth-child(2){transition-delay:.17s}
-.card.is-previewing .frame-strip img:nth-child(3),.card:focus-visible .frame-strip img:nth-child(3){transition-delay:.26s}
-.card.is-previewing .frame-strip img:nth-child(4),.card:focus-visible .frame-strip img:nth-child(4){transition-delay:.35s}
+.thumb .frame-strip{position:absolute;z-index:3;left:0;right:0;bottom:0;height:30%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(5px,.8vw,11px);padding:0 clamp(8px,1.2vw,16px) clamp(8px,1.2vw,16px);align-items:end;background:linear-gradient(180deg,transparent 0%,rgba(10,11,10,.12) 25%,rgba(10,11,10,.76) 100%);opacity:0;pointer-events:none;will-change:opacity}
+.thumb .frame-strip img{width:100%;height:auto;max-width:100%;min-height:0;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid rgba(255,255,255,.68);box-shadow:0 5px 18px rgba(0,0,0,.24);opacity:0;will-change:opacity,transform}
+.card.is-previewing .frame-strip{opacity:1}
+.card.is-previewing .frame-strip img{opacity:1}
 .card[data-project="story"]{grid-column:span 7}
 .card[data-project="story"] .thumb{aspect-ratio:16/9}
 @media(max-width:700px){.thumb .frame-strip{height:30%;gap:4px;padding:0 7px 7px}.thumb .frame-strip img{border-width:1px}.card[data-project="story"]{grid-column:1}.card[data-project="story"] .thumb{aspect-ratio:16/9}.skills{grid-template-columns:1fr;gap:0}.skill-card{min-height:88px;padding:13px 2px;grid-template-columns:38px 1fr auto}.skill-card:hover{padding-left:10px}.skill-card strong{font-size:17px}.skill-card>span{font-size:10px}}
@@ -384,6 +380,10 @@ function showDetail(isSwap){
     gsap.killTweensOf(content);
     gsap.fromTo(content,{autoAlpha:0,y:22},{autoAlpha:1,y:0,duration:.5,stagger:.06,ease:'power3.out',clearProps:'y'});
   }
+  const pb=document.getElementById('playButton');
+  const vh=document.getElementById('videoFrame').querySelector('.video-hint');
+  if(pb)gsap.fromTo(pb,{autoAlpha:0,y:12,scale:.93},{autoAlpha:1,y:0,scale:1,duration:.55,delay:.5,ease:'back.out(1.8)',clearProps:'y,scale'});
+  if(vh)gsap.fromTo(vh,{autoAlpha:0,y:9},{autoAlpha:1,y:0,duration:.5,delay:.62,ease:'power3.out',clearProps:'y'});
 }
 function closeProject(){
   if(!overlay.classList.contains('open'))return;
@@ -541,11 +541,30 @@ document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',(
 }));
 
 // Hover preview: cards play their preview clip while hovered / focused.
+// 四截图用 GSAP 交错入场（浮起+微旋转），移出时快速淡退。
 document.querySelectorAll('.card[data-project]').forEach(function(card){
   var hv = card.querySelector('.hover-video');
   if(hv && hv.getAttribute('src')) card.classList.add('has-preview-video');
-  function play(){ if(!hv || !hv.getAttribute('src')) return; card.classList.add('is-previewing'); try{ hv.currentTime = 0; }catch(e){} var pp = hv.play(); if(pp && pp.catch) pp.catch(function(){}); }
-  function stop(){ if(!hv) return; try{ hv.pause(); hv.currentTime = 0; }catch(e){} card.classList.remove('is-previewing'); }
+  var strip = card.querySelector('.frame-strip');
+  var imgs = strip ? Array.prototype.slice.call(strip.querySelectorAll('img')) : [];
+  if(window.gsap && imgs.length){
+    gsap.set(strip,{opacity:0});
+    gsap.set(imgs,{opacity:0,y:44,scale:.88,rotation:function(i){return [1.4,-1,1.1,-1.2][i%4];}});
+  }
+  function framesIn(){
+    if(!window.gsap || !strip) return;
+    gsap.killTweensOf([strip].concat(imgs));
+    gsap.to(strip,{opacity:1,duration:.3,ease:'power2.out'});
+    if(imgs.length) gsap.to(imgs,{opacity:1,y:0,scale:1,rotation:0,duration:.6,ease:'power3.out',stagger:.08,delay:.03,clearProps:'rotation'});
+  }
+  function framesOut(){
+    if(!window.gsap || !strip) return;
+    gsap.killTweensOf([strip].concat(imgs));
+    gsap.to(strip,{opacity:0,duration:.2,ease:'power2.in'});
+    gsap.to(imgs,{opacity:0,y:14,scale:.97,duration:.22,ease:'power2.in'});
+  }
+  function play(){ if(!hv || !hv.getAttribute('src')) return; card.classList.add('is-previewing'); framesIn(); try{ hv.currentTime = 0; }catch(e){} var pp = hv.play(); if(pp && pp.catch) pp.catch(function(){}); }
+  function stop(){ if(!hv) return; try{ hv.pause(); hv.currentTime = 0; }catch(e){} card.classList.remove('is-previewing'); framesOut(); }
   card.addEventListener('mouseenter', play);
   card.addEventListener('mouseleave', stop);
   card.addEventListener('focusin', play);
