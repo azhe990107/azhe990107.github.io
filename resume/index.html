@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>曹喆｜视频剪辑师 · 摄影师</title>
+<style>
+:root{--ink:#171717;--paper:#ffffff;--white:#f8f7f3;--muted:#77746d;--line:#d9d7d1;--acid:#e4c84f;--blue:#b99b35}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#e9e8e4;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;padding:34px 18px;line-height:1.68;letter-spacing:.005em}
+.resume{max-width:1040px;margin:0 auto;background:var(--paper);box-shadow:0 24px 70px #17191820;overflow:hidden}
+.topline{height:8px;background:var(--acid)}
+header{padding:52px 54px 34px;background-color:#292929;background-image:radial-gradient(ellipse at 15% 10%,#ffffff0c 0,transparent 48%),radial-gradient(ellipse at 85% 80%,#00000038 0,transparent 58%),repeating-linear-gradient(0deg,#ffffff03 0px,#ffffff03 1px,transparent 1px,transparent 3px);color:var(--white);position:relative;overflow:hidden;border-bottom:1px solid #ffffff20}
+header:after{content:"剪辑 / 摄影 / 叙事";position:absolute;right:-16px;bottom:-22px;font-size:clamp(32px,6vw,74px);font-weight:900;letter-spacing:-.06em;color:#ffffff09;white-space:nowrap}
+.kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--acid);font-weight:750;margin-bottom:20px}
+.headgrid{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;position:relative;z-index:1}
+h1{font-size:clamp(44px,7vw,72px);line-height:.98;letter-spacing:-.055em;font-weight:760;text-shadow:0 1px 0 #ffffff08}
+.subtitle{margin-top:17px;color:#c7c5bf;font-size:15px;letter-spacing:.09em}
+.target{border:1px solid #65727b;padding:12px 15px;font-size:12px;line-height:1.7;max-width:210px;color:#e4e9ec}
+.contact{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;padding-top:20px;border-top:1px solid #414c54;font-size:12px;color:#d1d8dc;position:relative;z-index:1}
+.contact a{color:var(--acid);text-decoration:none;border-bottom:1px solid #aab9c466}
+main{display:grid;grid-template-columns:285px minmax(0,1fr)}
+aside{padding:36px 30px 42px;background:#f4f3ef;border-right:1px solid var(--line)}
+.content{padding:36px 42px 42px;background:#fff}
+.section{margin-bottom:32px}
+.section-title{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin-bottom:17px}
+.section-title:before{content:"";width:18px;height:3px;background:var(--acid);display:inline-block}
+.section-title span{color:var(--muted);font-weight:500;letter-spacing:.04em}
+.edu-school{font-weight:800;font-size:15px}
+.meta{color:var(--muted);font-size:12px;margin-top:3px}
+.skills{display:flex;flex-wrap:wrap;gap:7px}
+.skill{font-size:12px;padding:5px 9px;border:1px solid #d5d3cc;background:#fbfaf7;color:#333}
+.lang{font-size:13px}.lang strong{margin-right:10px}
+.profile{font-size:13px;line-height:1.85;color:#454545;border-left:3px solid var(--acid);padding-left:13px}
+.portfolio{display:block;padding:16px;background:#292929;background-image:repeating-linear-gradient(0deg,#ffffff03 0px,#ffffff03 1px,transparent 1px,transparent 3px);color:#f8f7f3;text-decoration:none;font-size:13px;font-weight:750;overflow-wrap:anywhere;border:1px solid #393939}
+.portfolio small{display:block;font-size:10px;letter-spacing:.12em;margin-bottom:5px}
+.portfolio .url{border-bottom:1px solid #e8c547;padding-bottom:2px;color:#f0d45d}
+.edu-note{font-size:12px;color:#55594f;line-height:1.8}
+.exp{position:relative;padding:0 0 25px 20px;margin-left:3px;border-left:1px solid #c7c9bf}
+.exp:last-child{padding-bottom:0}
+.exp:before{content:"";position:absolute;left:-5px;top:5px;width:9px;height:9px;background:var(--acid);border:2px solid var(--ink);border-radius:50%}
+.exp-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.company{font-size:17px;line-height:1.35;font-weight:850;letter-spacing:-.025em}
+.role{font-size:12px;color:var(--blue);font-weight:800;margin-top:4px}
+.date{white-space:nowrap;background:#f1f0eb;padding:5px 8px;font-size:10px;font-weight:700;color:#3b3933;border-left:3px solid var(--acid)}
+ul{list-style:none;margin-top:12px}
+li{font-size:13px;color:#41453e;line-height:1.75;margin:0 0 6px;display:grid;grid-template-columns:12px 1fr;gap:5px}
+li:before{content:"↳";font-weight:800;color:var(--blue)}
+.highlight{background:var(--acid);color:var(--ink);padding:2px 5px;font-size:10px;font-weight:900;margin-left:7px;vertical-align:2px}
+.footer{padding:16px 54px;display:flex;justify-content:space-between;gap:10px;background:#242424;color:#bcbab3;font-size:10px;letter-spacing:.08em;border-top:1px solid #ffffff12}
+@media(max-width:720px){body{padding:0}.resume{box-shadow:none}.topline{height:6px}header{padding:34px 25px 25px}.headgrid{align-items:flex-start;flex-direction:column;gap:20px}.target{max-width:none}.contact{gap:10px 16px;margin-top:24px}main{grid-template-columns:1fr}.content{padding:30px 25px}aside{padding:30px 25px;border-right:0;border-bottom:1px solid var(--line)}.exp-head{flex-direction:column;gap:7px}.date{white-space:normal}.footer{padding:15px 25px;flex-direction:column}}
+@media print{body{padding:0;background:white}.resume{max-width:none;box-shadow:none}.topline{height:5px}header{print-color-adjust:exact;-webkit-print-color-adjust:exact}aside,.target,.portfolio,.footer,.skill,.date{print-color-adjust:exact;-webkit-print-color-adjust:exact}main{grid-template-columns:27% 73%}.content{padding:28px 32px}aside{padding:28px 24px}.section,.exp{break-inside:avoid}a{color:inherit}}
+</style>
+</head>
+<body>
+<div class="resume">
+<div class="topline"></div>
+<header>
+  <div class="kicker">Visual storyteller · Editor · Photographer</div>
+  <div class="headgrid">
+    <div><h1>曹喆</h1><div class="subtitle">视频剪辑师 / 摄影师 / 视觉内容制作</div></div>
+    <div class="target">求职方向<br><strong>视频剪辑 · 商业摄影 · 品牌内容制作</strong></div>
+  </div>
+  <div class="contact">
+    <span>☎ 17568917464</span>
+    <span>✉ <a href="mailto:1003758908@qq.com">1003758908@qq.com</a></span>
+    <span>⌖ 云南 · 可到岗面试</span>
+    <span>↗ <a href="https://azhe990107.github.io" target="_blank" rel="noopener">作品集 Portfolio</a></span>
+  </div>
+</header>
+<main>
+<aside>
+  <section class="section">
+    <h2 class="section-title">作品集 <span>/ Selected work</span></h2>
+    <a class="portfolio" href="https://azhe990107.github.io" target="_blank" rel="noopener"><small>VIEW MY WORK ↗</small><span class="url">azhe990107.github.io</span></a>
+  </section>
+  <section class="section">
+    <h2 class="section-title">专业技能 <span>/ Skills</span></h2>
+    <div class="skills">
+      <span class="skill">Premiere Pro</span><span class="skill">DaVinci Resolve</span><span class="skill">剪映</span><span class="skill">After Effects</span><span class="skill">Photoshop</span><span class="skill">拍摄与灯光</span><span class="skill">调色与声音</span><span class="skill">脚本与分镜</span><span class="skill">短视频内容策划</span>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">个人简介 <span>/ Profile</span></h2>
+    <p class="profile">具备拍摄、剪辑、调色与交付的完整项目经验，能够根据品牌定位、客户需求与内容类型调整影像表达。重视叙事节奏、画面质感和声音细节，兼顾创意表达、沟通效率与交付标准。</p>
+  </section>
+  <section class="section">
+    <h2 class="section-title">教育背景 <span>/ Education</span></h2>
+    <div class="edu-school">云南大学滇池学院</div>
+    <div class="meta">本科 · 2017.09 – 2021.06</div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">语言能力 <span>/ Language</span></h2>
+    <div class="lang"><strong>普通话</strong>二级甲等</div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">校园经历 <span>/ Campus</span></h2>
+    <div class="edu-school">云南大学滇池学院吉他社</div>
+    <div class="role">社长 · 2017.09 – 2020.09</div>
+    <p class="edu-note" style="margin-top:9px">策划社团活动与校园推广，制作海报、图文及短视频；统筹微电影、短视频拍摄和校园文艺汇演；开设吉他乐理与演奏课程。</p>
+  </section>
+</aside>
+<div class="content">
+  <section class="section">
+    <h2 class="section-title">工作经历 <span>/ Experience</span></h2>
+    <article class="exp">
+      <div class="exp-head"><div><div class="company">几何文化传媒</div><div class="role">剪辑师 / 摄影师 <span class="highlight">商业内容</span></div></div><div class="date">2024.09 – 2026.08</div></div>
+      <ul>
+        <li>根据甲方客户的项目目标与创意需求，负责多类型视频的前期拍摄、素材整理、剪辑包装及成片交付。</li>
+        <li>覆盖不同内容场景与传播用途，灵活调整叙事结构、剪辑节奏、画面风格及声音设计，确保成片符合客户需求。</li>
+        <li>负责工作室广告样片的拍摄与后期制作，持续维护、更新作品内容，呈现团队的创意方向与制作能力。</li>
+        <li>配合项目沟通与修改反馈，推进版本迭代和交付流程，兼顾画面质量、制作效率与成片完整度。</li>
+      </ul>
+    </article>
+    <article class="exp">
+      <div class="exp-head"><div><div class="company">现代经典婚纱摄影</div><div class="role">剪辑师 / 摄影师 / 自媒体账号运营</div></div><div class="date">2023.08 – 2024.08</div></div>
+      <ul>
+        <li>负责婚纱 MV 的全流程拍摄与剪辑，结合新人故事和影像风格完成个性化成片。</li>
+        <li>策划并制作抖音、小红书等平台的图文与短视频内容，完成文案编辑、素材拍摄及内容发布协作。</li>
+        <li>制作品牌宣传短片，承担拍摄、剪辑、调色与特效包装等工作，统一品牌视觉表达。</li>
+        <li>参与拍摄筹备与制作流程协调，把控成片质量并推进项目按期交付。</li>
+      </ul>
+    </article>
+    <article class="exp">
+      <div class="exp-head"><div><div class="company">云南佰仕顺科技有限公司</div><div class="role">视频剪辑师</div></div><div class="date">2022.01 – 2023.07</div></div>
+      <ul>
+        <li>使用 Premiere Pro、DaVinci Resolve 等工具完成视频剪辑、字幕包装、音效处理与画面合成。</li>
+        <li>依据创意脚本进行视频二次创作，优化叙事节奏与视听表达；结合团队反馈迭代版本，提升成片完成度。</li>
+      </ul>
+    </article>
+    <article class="exp">
+      <div class="exp-head"><div><div class="company">虹川钢构有限公司</div><div class="role">会计</div></div><div class="date">2021.08 – 2022.01</div></div>
+      <ul>
+        <li>负责会计凭证审核、账务处理、财务报表编制及固定资产核对，协助完成纳税申报与基础数据分析。</li>
+      </ul>
+    </article>
+    <article class="exp">
+      <div class="exp-head"><div><div class="company">俊发商业集团</div><div class="role">市场运营专员</div></div><div class="date">2021.01 – 2021.05</div></div>
+      <ul>
+        <li>开展市场调研与商户档案整理，汇总经营数据；对接商户沟通协调，协助维护市场秩序及开展安全巡检。</li>
+      </ul>
+    </article>
+  </section>
+</div>
+</main>
+<div class="footer"><span>曹喆 · 简历 / RESUME</span><span>VIDEO EDITING · PHOTOGRAPHY · VISUAL STORYTELLING</span><span>2026</span></div>
+</div>
+</body>
+</html>
